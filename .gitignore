@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.env.*
+
+# Node / React
+frontend/node_modules/
+frontend/build/
+
+# OS/System
+.DS_Store
+Thumbs.db
