@@ -23,9 +23,7 @@ Frontend: React, Vite
 Other: dotenv for environment variables
 
 Project Structure
-bash
-Copy
-Edit
+
 ai-resume-matcher/
 │── backend/
 │   ├── main.py           # FastAPI server
@@ -37,21 +35,15 @@ Installation & Setup
 1. Backend (FastAPI)
 Clone the repository:
 
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/ai-resume-matcher.git
+
+git clone https://github.com/tobin4900/ai-resume-matcher.git
 Navigate to backend:
 
-bash
-Copy
-Edit
+
 cd ai-resume-matcher/backend
 Install dependencies:
 
-bash
-Copy
-Edit
+
 pip install -r requirements.txt
 Create a .env file and add your Gemini API key:
 
@@ -67,34 +59,24 @@ Edit
 uvicorn main:app --reload
 API runs at:
 
-arduino
-Copy
-Edit
+
 http://localhost:8000
 2. Frontend (React)
 Navigate to frontend:
 
-bash
-Copy
-Edit
+
 cd ai-resume-matcher/frontend
 Install dependencies:
 
-bash
-Copy
-Edit
+
 npm install
 Start development server:
 
-bash
-Copy
-Edit
+
 npm run dev
 App runs at:
 
-arduino
-Copy
-Edit
+
 http://localhost:5173
 API Documentation
 POST /match_resume
@@ -108,18 +90,14 @@ job_description (string)
 
 Response:
 
-json
-Copy
-Edit
+
 {
   "result": "Match Score: 85/100\nFeedback: Resume is strong but add Python experience."
 }
 GET /
 Health check endpoint:
 
-json
-Copy
-Edit
+
 { "message": "Resume Matcher API is running." }
 Notes
 Make sure you have a valid Gemini API key.
