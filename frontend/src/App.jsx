@@ -27,11 +27,12 @@ export default function ResumeMatcher() {
         body: formData,
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to get response from server");
+        throw new Error(data.error || "Failed to get response from server");
       }
 
-      const data = await response.json();
       setResult(data.result || "No result returned");
     } catch (err) {
       setError(err.message);

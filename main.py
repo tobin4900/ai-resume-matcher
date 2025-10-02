@@ -33,7 +33,7 @@ def extract_text_from_pdf(file: UploadFile) -> str:
 
 # Function to get AI-based resume match score using Gemini
 def get_match_score(resume_text: str, job_description: str) -> str:
-    model = genai.GenerativeModel('gemini-1.5-flash')  # Use lighter model to avoid quota limits
+    model = genai.GenerativeModel('gemini-2.5-flash')  # Use lighter model to avoid quota limits
     prompt = f"""
 You are an AI resume evaluator. Compare the following resume to the job description and give a match score out of 100, and give brief feedback.
 
@@ -55,8 +55,11 @@ Feedback: <Your feedback here>
 @app.post("/match_resume")
 async def match_resume(resume: UploadFile, job_description: str = Form(...)):
     try:
+        print(f"Job Description: {job_description}")
         resume_text = extract_text_from_pdf(resume)
+        print(f"Resume Text: {resume_text}")
         result = get_match_score(resume_text, job_description)
+        print(f"Result: {result}")
         return JSONResponse(content={"result": result})
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
