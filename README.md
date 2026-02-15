@@ -1,105 +1,94 @@
+# AI Resume Matcher
 
-AI Resume Matcher
 This project is an AI-powered resume shortlisting tool that evaluates how well a resume matches a given job description. It calculates a match score and provides feedback on skills and improvements needed for better ATS compatibility.
 
-Features
-Upload a PDF resume and input a job description
+## Features
+- **Upload Resume**: Support for PDF resume uploads.
+- **Job Description**: Analyze resumes against specific job descriptions.
+- **AI Analysis**: Uses Google Gemini API to generate a match score (0–100) and detailed feedback.
+- **Text Extraction**: Uses PyMuPDF to extract text from PDFs.
+- **Modern UI**: Built with React and Vite for a fast, responsive user interface.
 
-AI model (Gemini API) analyzes the resume against the job description
+## Tech Stack
+- **Backend**: FastAPI, PyMuPDF, Google Generative AI (Gemini API)
+- **Frontend**: React, Vite
+- **Deployment**: Render (Backend), Vercel (Frontend)
 
-Generates a match score (0–100) and brief feedback
-
-Extracts text from PDF resumes using PyMuPDF
-
-Built with FastAPI for backend and React for frontend
-
-Handles cross-origin requests with CORS middleware
-
-Tech Stack
-Backend: FastAPI, PyMuPDF, Google Generative AI (Gemini API)
-
-Frontend: React, Vite
-
-Other: dotenv for environment variables
-
-Project Structure
-
+## Project Structure
+```
 ai-resume-matcher/
 │── backend/
 │   ├── main.py           # FastAPI server
-│   ├── .env              # API keys and environment variables
+│   ├── requirements.txt  # Python dependencies
+│   ├── .env              # API keys (not committed)
 │── frontend/
-│   ├── src/              # React code
-│   ├── package.json
-Installation & Setup
-1. Backend (FastAPI)
-Clone the repository:
+│   ├── src/              # React source code
+│   ├── package.json      # Node dependencies
+│── README.md
+```
 
+## Local Development Setup
 
-git clone https://github.com/tobin4900/ai-resume-matcher.git
-Navigate to backend:
+### 1. Backend (FastAPI)
+1.  Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+2.  Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    # Windows
+    venv\Scripts\activate
+    # Mac/Linux
+    source venv/bin/activate
+    ```
+3.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  Create a `.env` file in the `backend` folder and add your API key:
+    ```ini
+    GEMINI_API_KEY=your_gemini_api_key_here
+    ```
+5.  Start the server:
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The API will run at `http://127.0.0.1:8000`.
 
+### 2. Frontend (React)
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+    The app will run at `http://localhost:5173`.
 
-cd ai-resume-matcher/backend
-Install dependencies:
+## Deployment Guide
 
+### Backend (Render)
+1.  Create a **Web Service** on [Render](https://render.com).
+2.  Connect your repository.
+3.  **Root Directory**: `backend`
+4.  **Build Command**: `pip install -r requirements.txt`
+5.  **Start Command**: `uvicorn main:app --host 0.0.0.0 --port 10000`
+6.  **Environment Variables**: Add `GEMINI_API_KEY`.
+7.  Deploy and copy the backend URL (e.g., `https://your-app.onrender.com`).
 
-pip install -r requirements.txt
-Create a .env file and add your Gemini API key:
+### Frontend (Vercel)
+1.  Create a **New Project** on [Vercel](https://vercel.com).
+2.  Import your repository.
+3.  **Root Directory**: `frontend`
+4.  **Environment Variables**: Add `VITE_API_URL` with your Render Backend URL (no trailing slash).
+5.  Deploy.
 
-ini
-Copy
-Edit
-GEMINI_API_KEY=your_api_key_here
-Start the FastAPI server:
-
-bash
-Copy
-Edit
-uvicorn main:app --reload
-API runs at:
-
-
-http://localhost:8000
-2. Frontend (React)
-Navigate to frontend:
-
-
-cd ai-resume-matcher/frontend
-Install dependencies:
-
-
-npm install
-Start development server:
-
-
-npm run dev
-App runs at:
-
-
-http://localhost:5173
-API Documentation
-POST /match_resume
-Upload a PDF resume and provide a job description.
-
-Form Data:
-
-resume (file)
-
-job_description (string)
-
-Response:
-
-
-{
-  "result": "Match Score: 85/100\nFeedback: Resume is strong but add Python experience."
-}
-GET /
-Health check endpoint:
-
-
-{ "message": "Resume Matcher API is running." }
-Notes
-Make sure you have a valid Gemini API key.
-
-The backend must be running for the frontend to work properly.
+## API Documentation
+- **POST /match_resume**: Upload a PDF resume and job description to get a match score and feedback.
+- **GET /**: Health check endpoint.
