@@ -219,7 +219,8 @@ export default function ResumeMatcher() {
       formData.append("resume", resumeFile);
       formData.append("job_description", jobDescription);
 
-      const response = await fetch("http://127.0.0.1:8000/match_resume", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+      const response = await fetch(`${API_URL}/match_resume`, {
         method: "POST",
         body: formData,
       });
